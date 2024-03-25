@@ -1,0 +1,20 @@
+# Node modules
+frontend/node_modules
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+backend/__pycache__
+backend/.venv
+
+# Backend DICOM images
+backend/images
