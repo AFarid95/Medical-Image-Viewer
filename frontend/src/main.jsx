@@ -13,11 +13,9 @@ if (container) {
   const root = createRoot(container)
 
   root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App renderingEngine={getRenderingEngine()}/>
-      </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+      <App renderingEngine={getRenderingEngine()}/>
+    </Provider>
   )
 } else {
   throw new Error(

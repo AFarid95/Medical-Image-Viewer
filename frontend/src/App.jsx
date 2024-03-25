@@ -4,7 +4,7 @@ import { Images } from './features/images/Images.jsx'
 
 const App = renderingEngine => {
   return (
-    <div className="App">
+    <div>
       <UploadImageForm />
       <Images />
     </div>
