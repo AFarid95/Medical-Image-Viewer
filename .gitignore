@@ -17,4 +17,4 @@ backend/__pycache__
 backend/.venv
 
 # Backend DICOM images
-backend/images
+backend/static/images

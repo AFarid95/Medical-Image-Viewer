@@ -6,37 +6,33 @@ import * as cornerstone from '@cornerstonejs/core';
 import cornerstoneDICOMImageLoader from '@cornerstonejs/dicom-image-loader';
 import dicomParser from 'dicom-parser';
 
-async function initCornerstone() {
-    const { preferSizeOverAccuracy, useNorm16Texture } =
-        cornerstone.getConfiguration().rendering;
+const { preferSizeOverAccuracy, useNorm16Texture } =
+    cornerstone.getConfiguration().rendering;
 
-    cornerstoneDICOMImageLoader.external.cornerstone = cornerstone;
-    cornerstoneDICOMImageLoader.external.dicomParser = dicomParser;
+cornerstoneDICOMImageLoader.external.cornerstone = cornerstone;
+cornerstoneDICOMImageLoader.external.dicomParser = dicomParser;
 
-    cornerstoneDICOMImageLoader.configure({
-        useWebWorkers: true,
-        decodeConfig: {
-            convertFloatPixelDataToInt: false,
-            use16BitDataType: preferSizeOverAccuracy || useNorm16Texture,
+cornerstoneDICOMImageLoader.configure({
+    useWebWorkers: true,
+    decodeConfig: {
+        convertFloatPixelDataToInt: false,
+        use16BitDataType: preferSizeOverAccuracy || useNorm16Texture,
+    },
+});
+
+cornerstoneDICOMImageLoader.webWorkerManager.initialize({
+    maxWebWorkers: navigator.hardwareConcurrency || 1,
+    startWebWorkersOnDemand: false,
+    taskConfiguration: {
+        decodeTask: {
+            initializeCodecsOnStartup: false,
+            strict: false,
         },
-    });
+    }
+});
 
-    cornerstoneDICOMImageLoader.webWorkerManager.initialize({
-        maxWebWorkers: navigator.hardwareConcurrency || 1,
-        startWebWorkersOnDemand: false,
-        taskConfiguration: {
-            decodeTask: {
-                initializeCodecsOnStartup: false,
-                strict: false,
-            },
-        }
-    });
+await init()
 
-    await init()
-}
+const renderingEngine = new RenderingEngine("myRenderingEngine")
 
-function getRenderingEngine() {
-    return new RenderingEngine("myRenderingEngine");
-}
-
-export {initCornerstone, getRenderingEngine}
+export {renderingEngine}

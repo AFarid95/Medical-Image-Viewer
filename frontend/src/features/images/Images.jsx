@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllImageIDs, fetchImageIDs } from './imageIDsSlice'
+import { Image } from './Image'
 
 export const Images = () => {
   const dispatch = useDispatch()
@@ -23,10 +24,10 @@ export const Images = () => {
       break
     case 'succeeded':
       content = <ul>
-                  {imageIDs.map(imageID => (
-                    <li key={imageID}>{imageID}</li>
-                  ))}
-                </ul>
+        {
+          imageIDs.map(imageID => <Image key={imageID} imageID={imageID} />)
+        }
+        </ul>
       break
     case 'failed':
       content = <div>Error: {error}</div>

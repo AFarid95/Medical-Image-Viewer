@@ -10,7 +10,6 @@ const initialState = {
 export const fetchImageIDs = createAsyncThunk(
                               'imageIDs/fetchImageIDs',
                               async () => {
-  await new Promise(r => setTimeout(r, 1000));
   const response = await axios.get('http://localhost:5000/imageIDs');
   return response.data
 })
